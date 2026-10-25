@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bon retour, Clarisse</title>
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --bg1: #fdf3e7; --bg2: #f9d9c4; --bg3: #e8c5d6;
+    --card: rgba(255,255,255,0.78);
+    --text: #4a3a3a; --accent: #8a4b5a; --accent-hover: #a35d6e; --line: #c98a9a;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg1: #2a1f26; --bg2: #3a2630; --bg3: #4a2f3c;
+      --card: rgba(40,28,34,0.8);
+      --text: #f3e6e6; --accent: #f0b6c4; --accent-hover: #ffd0da; --line: #c98a9a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg1: #2a1f26; --bg2: #3a2630; --bg3: #4a2f3c;
+    --card: rgba(40,28,34,0.8);
+    --text: #f3e6e6; --accent: #f0b6c4; --accent-hover: #ffd0da; --line: #c98a9a;
+    color-scheme: dark;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    background-size: 200% 200%;
+    animation: fond 12s ease infinite;
+    color: var(--text);
+    overflow: hidden;
+  }
+  @keyframes fond { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .carte {
+    background: var(--card);
+    backdrop-filter: blur(6px);
+    max-width: 560px; margin: 20px; padding: 44px 36px;
+    border-radius: 20px; text-align: center;
+    box-shadow: 0 20px 50px rgba(120,70,70,0.2);
+    opacity: 0; transform: translateY(20px);
+    animation: apparition 1.6s ease forwards 0.4s;
+  }
+  @keyframes apparition { to { opacity: 1; transform: translateY(0); } }
+  .fleur { font-size: 2.4rem; margin-bottom: 12px; }
+  #accueil { text-align: center; padding: 20px; animation: apparition 1.2s ease forwards 0.3s; opacity: 0; transform: translateY(20px); }
+  #accueil .fleur { font-size: 3.4rem; }
+  #accueil button { font-size: 1.2rem; padding: 16px 36px; margin-top: 0; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  .cache { display: none; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+  .actions button { margin-top: 12px; }
+  a.bouton {
+    display: inline-block; margin-top: 12px; padding: 12px 28px; border-radius: 30px;
+    background: transparent; color: var(--accent); border: 2px solid var(--accent);
+    font-family: inherit; font-size: 1rem; text-decoration: none;
+    transition: transform .2s, background .2s, color .2s;
+  }
+  a.bouton:hover { background: var(--accent); color: var(--bg1); transform: scale(1.05); }
+  h1 { font-size: 2rem; font-weight: normal; margin-bottom: 8px; color: var(--accent); }
+  .ligne { width: 60px; height: 2px; background: var(--line); margin: 18px auto 24px; }
+  p { font-size: 1.08rem; line-height: 1.7; margin-bottom: 16px; }
+  .signature { margin-top: 26px; font-style: italic; color: var(--accent); }
+  button {
+    margin-top: 20px; padding: 12px 28px; border: none; border-radius: 30px;
+    background: var(--accent); color: var(--bg1);
+    font-family: inherit; font-size: 1rem; cursor: pointer;
+    transition: transform .2s, background .2s;
+  }
+  button:hover { background: var(--accent-hover); transform: scale(1.05); }
+  .petale {
+    position: fixed; top: -30px; font-size: 1.4rem; pointer-events: none;
+    animation: chute linear forwards;
+  }
+  @keyframes chute { to { transform: translateY(110vh) rotate(360deg); opacity: .6; } }
+</style>
+</head>
+<body>
+  <div id="accueil">
+    <div class="fleur">🌸</div>
+    <button onclick="reveler()">Une petite surprise 🌸</button>
+  </div>
+
+  <div class="carte cache" id="message">
+    <div class="fleur">🌸</div>
+    <h1>Bon retour, Clarisse</h1>
+    <div class="ligne"></div>
+    <p>J’espère que tes congés t’ont fait le plus grand bien et que tu as pu vraiment te reposer et en profiter.</p>
+    <p>Ta présence a manqué, et c’est un vrai plaisir de te retrouver aujourd’hui. Merci pour ton accompagnement et pour tout ce que j’apprends à tes côtés.</p>
+    <p>Je te souhaite une très belle reprise.</p>
+    <p class="signature">Avec toute ma gratitude,<br>Leuctres</p>
+    <div class="actions">
+      <button onclick="pluie()">Encore des pétales 🌸</button>
+      <a class="bouton" target="_blank" rel="noopener" href="https://mail.google.com/mail/?view=cm&fs=1&to=leuctres.nascimento2%40gmail.com&su=Merci%20pour%20ton%20message%20!&body=Merci%20Leuctres%2C%20j%E2%80%99ai%20bien%20vu%20ton%20message%20!%20%F0%9F%8C%B8">Répondre à Leuctres ✉️</a>
+    </div>
+  </div>
+<script>
+  function reveler() {
+    document.getElementById('accueil').classList.add('cache');
+    document.getElementById('message').classList.remove('cache');
+    pluie();
+  }
+  function pluie() {
+    var symboles = ['🌸', '✨', '🌷', '💐'];
+    for (var i = 0; i < 40; i++) {
+      (function (i) {
+        setTimeout(function () {
+          var el = document.createElement('div');
+          el.className = 'petale';
+          el.textContent = symboles[Math.floor(Math.random() * symboles.length)];
+          el.style.left = Math.random() * 100 + 'vw';
+          el.style.animationDuration = (3 + Math.random() * 3) + 's';
+          document.body.appendChild(el);
+          setTimeout(function () { el.remove(); }, 6500);
+        }, i * 90);
+      })(i);
+    }
+  }
+</script>
+</body>
+</html>
